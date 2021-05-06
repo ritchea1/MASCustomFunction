@@ -11,7 +11,7 @@ You can test functions locally before registering them on the server to
 understand how they work.
 
 Supply credentials by pasting them from the usage section into the UI.
-Place your credentials in a separate file that you don't check into the repo. 
+Place your credentials in a separate file that you don't check into the repo.
 
 '''
 
@@ -21,7 +21,7 @@ db_schema = None
 db = Database(credentials=credentials)
 
 '''
-Import and instantiate the functions to be tested 
+Import and instantiate the functions to be tested
 
 The local test will generate data instead of using server data.
 By default it will assume that the input data items are numeric.
@@ -36,13 +36,13 @@ This file will be written to the working directory.
 
 '''
 
-from custom.functions import HelloWorld
+from AICustom.AIModelDesign import AIModelDesign
 
-fn = HelloWorld(name='AS_Tester', greeting_col='greeting')
+fn = AIModelDesign(name='AS_Tester', greeting_col='greeting')
 fn.execute_local_test(db=db, db_schema=db_schema)
 
 '''
 Register function so that you can see it in the UI
 '''
 
-db.register_functions([HelloWorld])
+db.register_functions([AIModelDesign])
