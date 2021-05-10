@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 PACKAGE_URL = 'https://github.com/ritchea1/MASCustomFunction.git'
 
 
-class AICustomModel(BaseTransformer):
+class AIPredictionModel(BaseTransformer):
     '''
     The docstring of the function will show as the function description in the UI.
     '''
@@ -82,19 +82,20 @@ class AICustomModel(BaseTransformer):
         # Account for each argument - specifying it as a ui object in the "inputs" or "outputs" list
 
         inputs=[]
-        inputs.append(ui.UISingle(name='BPT1', datatype=float, description='BPT1'))
-        inputs.append(ui.UISingle(name='BPT2', datatype=float, description='BPT2'))
-        inputs.append(ui.UISingle(name='BPT3', datatype=float, description='BPT3'))
-        inputs.append(ui.UISingle(name='BPT4', datatype=float, description='BPT4'))
-        inputs.append(ui.UISingle(name='BPT5', datatype=float, description='BPT5'))
-        inputs.append(ui.UISingle(name='BPT6', datatype=float, description='BPT6'))
-        inputs.append(ui.UISingle(name='BPT7', datatype=float, description='BPT7'))
-        inputs.append(ui.UISingle(name='BPT8', datatype=float, description='BPT8'))
-        inputs.append(ui.UISingle(name='Powerup_Steam_Flow_Rate', datatype=float, description='Powerup Steam Flow Rate'))
-        inputs.append(ui.UISingle(name='Ratio_outlet_inlet_temp', datatype=float, description='Ratio of outlet inlet temp'))
-        inputs.append(ui.UISingle(name='Turbine_Inlet_Temperature', datatype=float, description='Turbine Inlet Temperature'))
-        inputs.append(ui.UISingle(name='Turbine_Outlet_Temperature', datatype=float, description='Turbine Outlet Temperature'))
-        inputs.append(ui.UISingle(name='Vibration', datatype=float, description='Vibration'))
+        '''inputs.append(ui.UISingle(name='BPT1', datatype=float, description='BPT1'))'''
+        inputs.append(ui.UIMultiItem(name='BPT1', datatype=float, description='BPT1'))
+        inputs.append(ui.UIMultiItem(name='BPT2', datatype=float, description='BPT2'))
+        inputs.append(ui.UIMultiItem(name='BPT3', datatype=float, description='BPT3'))
+        inputs.append(ui.UIMultiItem(name='BPT4', datatype=float, description='BPT4'))
+        inputs.append(ui.UIMultiItem(name='BPT5', datatype=float, description='BPT5'))
+        inputs.append(ui.UIMultiItem(name='BPT6', datatype=float, description='BPT6'))
+        inputs.append(ui.UIMultiItem(name='BPT7', datatype=float, description='BPT7'))
+        inputs.append(ui.UIMultiItem(name='BPT8', datatype=float, description='BPT8'))
+        inputs.append(ui.UIMultiItem(name='Powerup_Steam_Flow_Rate', datatype=float, description='Powerup Steam Flow Rate'))
+        inputs.append(ui.UIMultiItem(name='Ratio_outlet_inlet_temp', datatype=float, description='Ratio of outlet inlet temp'))
+        inputs.append(ui.UIMultiItem(name='Turbine_Inlet_Temperature', datatype=float, description='Turbine Inlet Temperature'))
+        inputs.append(ui.UIMultiItem(name='Turbine_Outlet_Temperature', datatype=float, description='Turbine Outlet Temperature'))
+        inputs.append(ui.UIMultiItem(name='Vibration', datatype=float, description='Vibration'))
         outputs = [
             ui.UIFunctionOutSingle(name='prediction', datatype=float, description='Output item produced by function')]
         return inputs, outputs
