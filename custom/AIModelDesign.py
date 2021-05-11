@@ -60,8 +60,8 @@ class AIFunctionCustom(BaseTransformer):
         response_scoringcpd = requests.post('https://mas-maslab2-cp4d-cpd-mas-maslab2-cp4d.maslab-wdc07-b3c-16x64-18312db33a3427c911e9adf447e95207-0000.us-east.containers.appdomain.cloud/icp4d-api/v1/authorize', json=payload_scoringcpd, headers=cpdheader)
         response_datacpd=json.loads(response_scoringcpd.text)
         mltoken='Bearer '+ str(response_datacpd["token"])
-        print('df-->'+df);
-        print('BPT1-->'+df['BPT1'])
+        logger.debug('df-->'+df);
+        logger.debug('BPT1-->'+df[BPT1])
         header = {'Content-Type': 'application/json', 'Authorization': mltoken}
         # NOTE: manually define and pass the array(s) of values to be scored in the next line
         val="["+str(self.BPT1)+","+str(self.BPT2)+","+str(self.BPT3)+","+str(self.BPT4)+","+str(self.BPT5)+","+str(self.BPT6)+","+str(self.BPT7)+","+str(self.BPT8)+","+str(self.Powerup_Steam_Flow_Rate)+","+str(self.Ratio_outlet_inlet_temp)+","+str(self.Steam_Supply_Pressure)+","+str(self.Turbine_Inlet_Temperature)+","+str(self.Turbine_Outlet_Temperature)+","+str(self.Vibration)+"]"
