@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 PACKAGE_URL = 'https://github.com/ritchea1/MASCustomFunction.git'
 
 
-class AIDesignModel(BaseTransformer):
+class AICustomFunction(BaseTransformer):
     '''
     The docstring of the function will show as the function description in the UI.
     '''
@@ -100,6 +100,7 @@ class AIDesignModel(BaseTransformer):
         inputs.append(ui.UISingleItem(name='BPT8', datatype=float, description='BPT8'))
         inputs.append(ui.UISingleItem(name='Powerup_Steam_Flow_Rate', datatype=float, description='Powerup Steam Flow Rate'))
         inputs.append(ui.UISingleItem(name='Ratio_outlet_inlet_temp', datatype=float, description='Ratio of outlet inlet temp'))
+        inputs.append(ui.UISingleItem(name='Steam_Supply_Pressure', datatype=float, description='Steam supply pressure'))
         inputs.append(ui.UISingleItem(name='Turbine_Inlet_Temperature', datatype=float, description='Turbine Inlet Temperature'))
         inputs.append(ui.UISingleItem(name='Turbine_Outlet_Temperature', datatype=float, description='Turbine Outlet Temperature'))
         inputs.append(ui.UISingleItem(name='Vibration', datatype=float, description='Vibration'))
