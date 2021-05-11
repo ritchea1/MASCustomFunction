@@ -79,7 +79,7 @@ class AIFunctionCustom(BaseTransformer):
         for df_row in df.itertuples(index=False, name=None):
             tmp = []
             for number in input_col_numbers:
-                tmp.append(f'"{str(df_row[number])}"')
+                tmp.append(str(df_row[number]))
             values = ",".join(tmp)
 
         header = {'Content-Type': 'application/json', 'Authorization': mltoken}
