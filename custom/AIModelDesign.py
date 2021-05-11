@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 PACKAGE_URL = 'https://github.com/ritchea1/MASCustomFunction.git'
 
 
-class AICustomFunction(BaseTransformer):
+class AIFunctionCustom(BaseTransformer):
     '''
     The docstring of the function will show as the function description in the UI.
     '''
