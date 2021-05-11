@@ -82,6 +82,7 @@ class AIFunctionCustom(BaseTransformer):
                 tmp.append(str(df_row[number]))
             values = ",".join(tmp)
 
+        values ="["+values+"]"
         header = {'Content-Type': 'application/json', 'Authorization': mltoken}
         # NOTE: manually define and pass the array(s) of values to be scored in the next line
         val="["+str(self.BPT1)+","+str(self.BPT2)+","+str(self.BPT3)+","+str(self.BPT4)+","+str(self.BPT5)+","+str(self.BPT6)+","+str(self.BPT7)+","+str(self.BPT8)+","+str(self.Powerup_Steam_Flow_Rate)+","+str(self.Ratio_outlet_inlet_temp)+","+str(self.Steam_Supply_Pressure)+","+str(self.Turbine_Inlet_Temperature)+","+str(self.Turbine_Outlet_Temperature)+","+str(self.Vibration)+"]"
