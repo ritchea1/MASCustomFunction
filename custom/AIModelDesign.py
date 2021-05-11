@@ -61,10 +61,12 @@ class AIFunctionCustom(BaseTransformer):
         response_datacpd=json.loads(response_scoringcpd.text)
         mltoken='Bearer '+ str(response_datacpd["token"])
         mapping = {}
+        print(df.columns.names)
         for column_number, column_name in enumerate(df.columns.names):
             mapping[column_name] = column_number
         input_col_names = [self.BPT1, self.BPT2, self.BPT3, self.BPT4, self.BPT5, self.BPT6, self.BPT7, self.BPT8,self.Powerup_Steam_Flow_Rate, self.Ratio_outlet_inlet_temp, self.Steam_Supply_Pressure,self.Turbine_Inlet_Temperature, self.Turbine_Outlet_Temperature, self.Vibration]
         input_col_numbers = []
+
         for col_name in input_col_names:
             input_col_numbers.append(mapping[col_name])
 
