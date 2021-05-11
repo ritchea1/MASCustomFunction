@@ -60,12 +60,35 @@ class AIFunctionCustom(BaseTransformer):
         response_scoringcpd = requests.post('https://mas-maslab2-cp4d-cpd-mas-maslab2-cp4d.maslab-wdc07-b3c-16x64-18312db33a3427c911e9adf447e95207-0000.us-east.containers.appdomain.cloud/icp4d-api/v1/authorize', json=payload_scoringcpd, headers=cpdheader)
         response_datacpd=json.loads(response_scoringcpd.text)
         mltoken='Bearer '+ str(response_datacpd["token"])
-        logger.debug('df-->'+df);
-        logger.debug('BPT1-->'+df[BPT1])
+
+
+        mapping = {}
+        for column_number, column_name in enumerate(df.columns.names):
+            mapping[column_name] = column_number
+
+        input_col_names = [self.BPT1, self.BPT2, self.BPT3, self.BPT4, self.BPT5, self.BPT6, self.BPT7, self.BPT8,
+                           self.Powerup_Steam_Flow_Rate, self.Ratio_outlet_inlet_temp, self.Steam_Supply_Pressure,
+                           self.Turbine_Inlet_Temperature, self.Turbine_Outlet_Temperature, self.Vibration]
+        input_col_numbers = []
+        for col_name in input_col_names:
+            input_col_numbers.append(mapping[col_name])
+
+        tmp = []
+        for col_name in input_col_names:
+            tmp.append(f'"{col_name}"')
+        fields = ",".join(tmp)
+        # Loop over all rows in data frame
+        predictions = []
+        for df_row in df.itertuples(index=False, name=None):
+            tmp = []
+            for number in input_col_numbers:
+                tmp.append(f'"{str(df_row[number])}"')
+            values = ",".join(tmp)
+
         header = {'Content-Type': 'application/json', 'Authorization': mltoken}
         # NOTE: manually define and pass the array(s) of values to be scored in the next line
         val="["+str(self.BPT1)+","+str(self.BPT2)+","+str(self.BPT3)+","+str(self.BPT4)+","+str(self.BPT5)+","+str(self.BPT6)+","+str(self.BPT7)+","+str(self.BPT8)+","+str(self.Powerup_Steam_Flow_Rate)+","+str(self.Ratio_outlet_inlet_temp)+","+str(self.Steam_Supply_Pressure)+","+str(self.Turbine_Inlet_Temperature)+","+str(self.Turbine_Outlet_Temperature)+","+str(self.Vibration)+"]"
-        vector="{\"input_data\":[{\"fields\":[\"BPT1\",\"BPT2\",\"BPT3\",\"BPT4\",\"BPT5\",\"BPT6\",\"BPT7\",\"BPT8\",\"Powerup Steam Flow Rate\",\"Ratio of outlet inlet temp\",\"Steam Supply Pressure\",\"Turbine Inlet Temperature\",\"Turbine Outlet Temperature\",\"Vibration\"],\"values\":["+val+"]}]}"
+        vector="{\"input_data\":[{\"fields\":[\"BPT1\",\"BPT2\",\"BPT3\",\"BPT4\",\"BPT5\",\"BPT6\",\"BPT7\",\"BPT8\",\"Powerup Steam Flow Rate\",\"Ratio of outlet inlet temp\",\"Steam Supply Pressure\",\"Turbine Inlet Temperature\",\"Turbine Outlet Temperature\",\"Vibration\"],\"values\":["+values+"]}]}"
         payload_scoring=json.loads(vector)
         response_scoring = requests.post('https://mas-maslab2-cp4d-cpd-mas-maslab2-cp4d.maslab-wdc07-b3c-16x64-18312db33a3427c911e9adf447e95207-0000.us-east.containers.appdomain.cloud/ml/v4/deployments/bbd9238a-3cff-459e-9aed-3b14c3b9449f/predictions?version=2021-05-03', json=payload_scoring, headers=header)
         print("Scoring response")
